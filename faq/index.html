@@ -142,7 +142,7 @@
       "description": "Gemini 3.6 Flash API pricing data for 2026: base input is $1.50 and output is $7.50 per 1M tokens, adjusted by group multiplier.",
       "offers": {
         "@type": "Offer",
-        "price": "待实测",
+        "price": "Not yet measured",
         "priceCurrency": "CNY",
         "url": "https://api.openlux.ai",
         "description": "Usage is billed from the listed base token rates after applying the user's group multiplier."
@@ -230,6 +230,14 @@ padding:2px 18px;margin:.8em 0}
 <li><a href="https://a37836323.github.io/gemini-3-6-flash-api/pricing/">How much does the Gemini 3.6 Flash API cost?</a><span>Base rates, billing basis and group multipliers</span></li>
 <li><a href="https://a37836323.github.io/gemini-3-6-flash-api/quickstart/">How do you call the Gemini 3.6 Flash API?</a><span>Setup steps and copy-pasteable code</span></li>
 <li><a href="https://a37836323.github.io/gemini-3-6-flash-api/compare/">Gemini 3.6 Flash: direct API or gateway?</a><span>Point-by-point, including the limitations</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/gemini-flash-buying/">Where to Buy Gemini 3.6 Flash API</a><span>Buy Gemini 3.6 Flash</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/gemini-flash-payment-options/">Gemini 3.6 Flash API Payment Options: Can You Pay Without a Credit Card?</a><span>Payment options and billing checks</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/api-relay-explained/">How Does an API Relay Work for Gemini 3.6 Flash?</a><span>API relay 101</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/claude-code-relay-config/">Set Up Gemini 3.6 Flash for Claude Code</a><span>Configure Claude Code relay access</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/gemini-flash-cost-comparison/">Gemini 3.6 Flash API Cost: A Practical Value Check</a><span>Compare Gemini Flash API costs</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/gemini-api-ban-risk/">Can Using Gemini 3.6 Flash API Lead to an Account Ban?</a><span>Review ban risk before using the API</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/gemini-flash-free-trial/">Can You Try Gemini 3.6 Flash API for Free in 2026?</a><span>Free allowance status</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api/organization-disabled-error-fix/">Cline shows “api error 400 this organization has been disabled”: what to check first</a><span>Disabled organization errors</span></li>
 </ul>
 </div>
 <div>
@@ -244,7 +252,6 @@ padding:2px 18px;margin:.8em 0}
 (function(){
   try{
     var EP='https://tk.openlux.ai/collect',S='gemini-3-6-flash-api',L='en-US',V=1;
-    // 会话内唯一，仅存在于内存：刷新即变，不落 cookie 也不落 storage
     var sid=Math.random().toString(36).slice(2)+Date.now().toString(36);
     function send(type,extra){
       try{
@@ -259,12 +266,10 @@ padding:2px 18px;margin:.8em 0}
         if(navigator.sendBeacon){
           navigator.sendBeacon(EP,new Blob([body],{type:'text/plain;charset=UTF-8'}));
         }else{
-          // 老浏览器兜底。keepalive 让请求在页面卸载后仍能发完
           fetch(EP,{method:'POST',body:body,keepalive:true,mode:'no-cors'});
         }
       }catch(e){}
     }
-    // 预渲染的页面不算一次真实访问，等真正可见了再报
     if(document.visibilityState==='prerender'){
       document.addEventListener('visibilitychange',function h(){
         if(document.visibilityState!=='prerender'){
@@ -274,7 +279,6 @@ padding:2px 18px;margin:.8em 0}
     }else{
       send('view');
     }
-    // 出站点击：只记去向和位置，不记任何个人信息
     document.addEventListener('click',function(e){
       var a=e.target&&e.target.closest?e.target.closest('a[data-cta]'):null;
       if(!a)return;
